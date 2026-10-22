@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>HELADERIA – Tardes de calor, helado en mano</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FFF6EC;--card:#fff;--ink:#2B1B5A;--soft:#6B5C99;--pink:#FF4F8B;--mint:#9BE3B4;--sun:#FFD84D;--berry:#5B3CC4;--line:#F3DCCB;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root:not([data-theme="light"]){color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1C1038;--card:#2A1A55;--ink:#FFF4F9;--soft:#C9B8F5;--line:#44307F}}
+:root[data-theme="dark"]{--bg:#1C1038;--card:#2A1A55;--ink:#FFF4F9;--soft:#C9B8F5;--line:#44307F}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth;overflow-x:clip}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 "DM Sans",system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{font-family:"Fredoka","Trebuchet MS",sans-serif;margin:0;line-height:1.05}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--berry);outline-offset:3px}
+.blob{position:fixed;z-index:-1;border-radius:50%;filter:blur(70px);opacity:.5;pointer-events:none}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;justify-content:space-between;align-items:center;padding:12px 5vw;background:color-mix(in srgb,var(--bg) 60%,transparent);backdrop-filter:blur(14px) saturate(1.4);-webkit-backdrop-filter:blur(14px) saturate(1.4);border-bottom:1px solid var(--line)}
+.logo{font:700 1.5rem "Fredoka",sans-serif;color:var(--pink);white-space:nowrap}
+.btn{display:inline-block;position:relative;overflow:hidden;border:0;cursor:pointer;border-radius:999px;font-weight:700;padding:12px 22px;text-align:center}
+.rip{position:absolute;border-radius:50%;background:rgba(255,255,255,.55);transform:scale(0);animation:rip .6s ease-out forwards;pointer-events:none}
+@keyframes rip{to{transform:scale(4);opacity:0}}
+.dom{background:var(--mint);color:#173B2A}
+.pedido{background:linear-gradient(135deg,var(--pink),#FF9A3D);color:#fff;font:700 1.5rem "Fredoka",sans-serif;padding:20px 40px;box-shadow:0 8px 0 #B8265F;animation:pulse 1.8s infinite}
+.pedido:active{transform:translateY(6px);box-shadow:0 2px 0 #B8265F}
+@keyframes pulse{50%{filter:brightness(1.12);box-shadow:0 8px 0 #B8265F,0 0 0 12px rgba(255,79,139,.18)}}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:center;padding:6vh 5vw 8vh;max-width:1150px;margin:auto}
+.hero h1{font-size:clamp(2.4rem,7.2vw,5.2rem);letter-spacing:-.02em;display:flex;flex-wrap:nowrap}
+.hero h1 span{display:inline-block;will-change:transform}
+.tg{font:700 clamp(1.6rem,4.5vw,2.6rem) "Fredoka",sans-serif;margin:.8rem 0 .4rem;line-height:1.1}
+.tg em{font-style:normal;color:var(--pink)}
+.sub{font-size:1.25rem;color:var(--soft);margin:0 0 1.6rem}
+.ctas{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.stage{position:relative;overflow:hidden;background:linear-gradient(160deg,#FFD84D,#FF9A3D);border-radius:50% 50% 45% 55%/55% 45% 55% 45%;aspect-ratio:1;display:grid;place-items:center}
+.stage svg{width:78%;height:auto}
+.rays{transform-origin:100px 100px;animation:spin 24s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.stage .t{position:absolute;bottom:9%;font:700 1rem "Fredoka",sans-serif;background:#fff;color:#2B1B5A;padding:6px 16px;border-radius:999px;transform:rotate(-3deg)}
+.sp{position:absolute;top:-20px;width:8px;height:18px;border-radius:4px}
+.rib{overflow:hidden;background:var(--pink);color:#fff;font:700 1.5rem "Fredoka",sans-serif;padding:14px 0;transform:rotate(-1.5deg);margin:2vh 0}
+.rib div{display:flex;gap:2.5rem;width:max-content;animation:mq 26s linear infinite;white-space:nowrap}
+@keyframes mq{to{transform:translateX(-50%)}}
+section{padding:7vh 5vw;max-width:1150px;margin:auto}
+h2{font-size:clamp(2rem,5vw,3.2rem);margin-bottom:.6rem}
+.lead{color:var(--soft);margin:0 0 2rem;max-width:52ch}
+.gal{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:1.4rem}
+.foto{margin:0;overflow:hidden;background:var(--card);border-radius:32px;border:2px solid var(--line);transition:transform .3s}
+.foto:nth-child(2){border-radius:60px 32px 60px 32px}
+.foto:hover{transform:translateY(-6px) rotate(-1deg)}
+.foto svg{display:block;width:100%;height:auto}
+.foto figcaption{padding:14px 18px 18px}
+.foto b{display:block;font:700 1.4rem "Fredoka",sans-serif}
+.foto span{color:var(--soft)}
+.cta{text-align:center;background:var(--berry);color:#fff;max-width:none;border-radius:60px 60px 0 0;margin-top:6vh}
+.cta .lead{color:#D9CCFF;margin-inline:auto}
+.cta .btn{margin:6px}
+footer{padding:1.6rem 5vw;text-align:center;background:var(--berry);color:#D9CCFF;font-size:.9rem}
+@media(max-width:760px){.hero{grid-template-columns:1fr;text-align:center}.hero h1,.ctas{justify-content:center}.stage{max-width:300px;margin:auto}}
+@media(max-width:520px){header{padding:10px 4vw}.logo{font-size:1.25rem}.dom{padding:10px 16px;font-size:.9rem}body{font-size:16px}.hero{padding:4vh 5vw 6vh}.sub{font-size:1.1rem}.pedido{width:100%;font-size:1.3rem;padding:16px 20px}.ctas .dom{width:100%;padding:14px}section{padding:5vh 5vw}.rib{font-size:1.15rem}.cta .btn{display:block;margin:10px 0}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="blob" style="width:380px;height:380px;background:#FF9A3D;top:-80px;left:-100px"></div>
+<div class="blob" style="width:340px;height:340px;background:#FF4F8B;bottom:5%;right:-90px"></div>
+
+<header>
+  <a class="logo" href="index.html" aria-label="HELADERIA, inicio">🍦 HELADERIA</a>
+  <a class="btn dom go" data-go="dom" href="menu.html#domicilio">🛵 DOMICILIO</a>
+</header>
+
+<main>
+<div class="hero">
+  <div>
+    <h1 id="title" aria-label="HELADERIA"></h1>
+    <p class="tg">Con este calor, <em>¡helado!</em></p>
+    <p class="sub">Tardes dulces. Sonrisas frías.</p>
+    <div class="ctas">
+      <a class="btn pedido go" href="menu.html">¡Realiza tu pedido!</a>
+      <a class="btn dom go" data-go="dom" href="menu.html#domicilio">🛵 DOMICILIO</a>
+    </div>
+  </div>
+  <div class="stage">
+    <svg viewBox="0 0 200 200" role="img" aria-label="Sol con gafas disfrutando de la tarde"><g class="rays" id="rays"></g><circle cx="100" cy="100" r="52" fill="#FF7A1A"/><circle cx="100" cy="100" r="46" fill="#FFB536"/><rect x="62" y="84" width="34" height="22" rx="8" fill="#2B1B5A"/><rect x="104" y="84" width="34" height="22" rx="8" fill="#2B1B5A"/><path d="M96 92h8" stroke="#2B1B5A" stroke-width="4"/><path d="M76 120q24 22 48 0" stroke="#2B1B5A" stroke-width="5" fill="none" stroke-linecap="round"/><circle cx="70" cy="116" r="6" fill="#FF6F9F" opacity=".7"/><circle cx="130" cy="116" r="6" fill="#FF6F9F" opacity=".7"/></svg>
+    <span class="t">☀️ ¡Hoy hace calor!</span>
+  </div>
+</div>
+
+<div class="rib" aria-hidden="true"><div id="mq"></div></div>
+
+<section>
+  <h2>Así se vive en HELADERIA</h2>
+  <p class="lead">Calor afuera, felicidad adentro.</p>
+  <div class="gal" id="gal"></div>
+</section>
+
+<section class="cta">
+  <h2>¿Ya se te antojó?</h2>
+  <p class="lead">Pide en un toque: en mesa, para llevar o a domicilio.</p>
+  <a class="btn dom go" data-go="dom" href="menu.html#domicilio" style="font-size:1.2rem">🛵 DOMICILIO</a>
+  <a class="btn pedido go" href="menu.html" style="animation:none;font-size:1.2rem;padding:14px 28px">Realiza tu pedido</a>
+</section>
+</main>
+<footer>© HELADERIA · <a href="menu.html" style="text-decoration:underline">Ver el menú</a> · Hecho con mucho amor y mucho azúcar</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+const $=s=>document.querySelector(s),RM=matchMedia("(prefers-reduced-motion: reduce)").matches,G=window.gsap&&!RM;
+
+const cols=["#FF4F8B","#FF9A3D","#E8B800","#2FB36B","#2AA9E0","#5B3CC4","#C13CC4","#FF4F8B","#FF9A3D"];
+$("#title").innerHTML=[..."HELADERIA"].map((c,i)=>`<span aria-hidden="true" style="color:${cols[i]}">${c}</span>`).join("");
+$("#rays").innerHTML=Array.from({length:12},(_,i)=>`<rect x="96" y="6" width="8" height="30" rx="4" fill="#FFF3B0" transform="rotate(${i*30} 100 100)"/>`).join("");
+const W=["Calor de tarde","Helado en mano","Sonrisas frías","Plan en familia","Domingos de antojo","Amigos y risas"];
+$("#mq").innerHTML=[0,1].map(()=>W.map(w=>`<span>☀️ ${w}</span>`).join("")).join("");
+
+// ----- 3 escenas dentro de una heladería (puedes cambiarlas por fotos reales <img>) -----
+const cone=(a,b)=>`<polygon points="25,85 75,85 50,155" fill="#E4A85B"/><path d="M33 95L58 120M42 95L63 112M50 130L38 108M62 98L46 136" stroke="#B9783A" stroke-width="2"/><circle cx="50" cy="68" r="29" fill="${a}"/><path d="M22 76q3 18 8 0M62 94q5 14 9 0" fill="${a}"/><circle cx="50" cy="42" r="22" fill="${b}"/><ellipse cx="41" cy="34" rx="6" ry="3" fill="#fff" opacity=".45"/><circle cx="50" cy="19" r="6" fill="#E11D48"/>`;
+const P=(x,y,k,skin,hair,shirt)=>`<g transform="translate(${x} ${y}) scale(${k})"><path d="M-46 100q0-52 46-52t46 52z" fill="${shirt}"/><circle r="38" fill="${skin}"/><path d="M-40 -6q-4-44 40-44t40 44q-12-24-40-24t-40 24z" fill="${hair}"/><path d="M-18 -6q6-8 12 0M6 -6q6-8 12 0" stroke="#2B1B5A" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M-18 8q18 22 36 0z" fill="#fff" stroke="#2B1B5A" stroke-width="3" stroke-linejoin="round"/><circle cx="-24" cy="6" r="6" fill="#FF8FA8" opacity=".7"/><circle cx="24" cy="6" r="6" fill="#FF8FA8" opacity=".7"/></g>`;
+const E=(x,y,s,t)=>`<text x="${x}" y="${y}" font-size="${s}" text-anchor="middle">${t}</text>`;
+const C=(x,y,k,a,b,r=0)=>`<g transform="translate(${x} ${y}) rotate(${r}) scale(${k})">${cone(a,b)}</g>`;
+const toldo=Array.from({length:12},(_,i)=>`<rect x="${i*50}" y="0" width="50" height="30" fill="${i%2?"#fff":"#FF4F8B"}"/><circle cx="${i*50+25}" cy="30" r="25" fill="${i%2?"#fff":"#FF4F8B"}"/>`).join("");
+const barra=`<rect y="222" width="400" height="80" fill="#fff"/><rect y="222" width="400" height="10" fill="#FF9A3D"/>`+[ "#FF6F9F","#7B4A32","#FFE39A","#A8D88E","#8B4FD0","#FFB536","#FF6F9F","#A8D88E"].map((c,i)=>`<circle cx="${28+i*49}" cy="262" r="14" fill="${c}"/>`).join("");
+const wall=(bg)=>`<rect width="400" height="300" fill="${bg}"/>`+toldo;
+const S=[
+ {a:"Dos amigos disfrutando un helado en la heladería",t:"Tardes de calor",d:"Helado en mano y a sonreír.",s:wall("#FFE9C7")+`<circle cx="335" cy="115" r="38" fill="#FFB536"/><circle cx="335" cy="115" r="30" fill="#FFD84D"/>`+P(120,150,.95,"#F2B38A","#3A2415","#FF4F8B")+P(250,155,.95,"#8A5A3C","#1A1020","#2AA9E0")+barra+C(168,85,.5,"#FF6F9F","#FFE39A",12)+C(298,95,.5,"#8B4FD0","#FFB536",-10)+E(200,205,26,"💧")},
+ {a:"Una familia comparte la mesa en la heladería",t:"Planes en familia",d:"La mesa llena de risas.",s:wall("#D6F5E1")+E(70,90,40,"💡")+E(330,90,40,"💡")+P(105,140,1,"#8A5A3C","#1A1020","#5B3CC4")+P(200,168,.75,"#E8A87C","#C0561F","#FFD84D")+P(295,140,1,"#F2B38A","#3A2415","#FF9A3D")+`<rect y="225" width="400" height="80" fill="#C0561F"/><rect y="225" width="400" height="10" fill="#A8461A"/>`+E(110,275,44,"🍨")+E(200,280,50,"🍦")+E(290,275,44,"🍧")},
+ {a:"Tres amigos brindan con helados",t:"Amigos y risas",d:"El mejor antojo se comparte.",s:wall("#FFD1E3")+E(60,95,34,"🎉")+E(340,95,34,"✨")+P(95,150,.95,"#E8A87C","#C0561F","#9BE3B4")+P(200,140,1,"#8A5A3C","#1A1020","#5B3CC4")+P(305,150,.95,"#F2B38A","#3A2415","#FFD84D")+barra+C(150,52,.5,"#A8D88E","#FF6F9F",25)+C(205,30,.55,"#FFB536","#8B4FD0",0)+C(262,52,.5,"#7B4A32","#FFE39A",-25)}
+];
+$("#gal").innerHTML=S.map(s=>`<figure class="foto"><svg viewBox="0 0 400 300" role="img" aria-label="${s.a}"><rect x="-600" width="1600" height="300" fill="#fff"/>${s.s}</svg><figcaption><b>${s.t}</b><span>${s.d}</span></figcaption></figure>`).join("");
+
+document.addEventListener("pointerdown",e=>{const b=e.target.closest(".btn");if(!b||RM)return;const r=b.getBoundingClientRect(),z=Math.max(r.width,r.height)/2,s=document.createElement("span");s.className="rip";s.style.cssText=`width:${z}px;height:${z}px;left:${e.clientX-r.left-z/2}px;top:${e.clientY-r.top-z/2}px`;b.append(s);setTimeout(()=>s.remove(),600)});
+
+if(G){
+ gsap.registerPlugin(ScrollTrigger);
+ gsap.from("#title span",{y:-160,rotation:-30,scale:.2,opacity:0,duration:1,ease:"bounce.out",stagger:.07});
+ gsap.to("#title span",{y:-8,duration:1.2,ease:"sine.inOut",yoyo:true,repeat:-1,stagger:.12,delay:1.6});
+ gsap.from(".tg,.sub,.ctas",{y:30,opacity:0,duration:.7,stagger:.15,delay:.7,ease:"power3.out"});
+ gsap.from(".stage",{scale:.6,rotation:-12,opacity:0,duration:1.1,ease:"elastic.out(1,.6)",delay:.3});
+ gsap.to(".stage svg",{scale:1.05,duration:1.6,ease:"sine.inOut",yoyo:true,repeat:-1});
+ const st=$(".stage"),cs=["#FF4F8B","#2AA9E0","#fff","#5B3CC4"];
+ for(let i=0;i<10;i++){const d=document.createElement("i");d.className="sp";d.style.cssText=`left:${Math.random()*96}%;background:${cs[i%4]}`;st.append(d);
+  gsap.fromTo(d,{y:-30,rotation:Math.random()*360},{y:st.offsetHeight+40,rotation:"+=240",duration:3+Math.random()*3,repeat:-1,delay:Math.random()*4,ease:"none"})}
+ gsap.to(".blob",{x:"random(-60,60)",y:"random(-50,50)",duration:6,ease:"sine.inOut",yoyo:true,repeat:-1,stagger:1});
+ gsap.from(".foto",{scrollTrigger:{trigger:"#gal",start:"top 88%"},y:70,scale:.92,opacity:0,duration:.9,stagger:.16,ease:"back.out(1.5)"});
+ gsap.from(".cta>*",{scrollTrigger:{trigger:".cta",start:"top 85%"},y:30,opacity:0,duration:.6,stagger:.12});
+ if(matchMedia("(pointer:fine)").matches)document.querySelectorAll(".pedido,.dom").forEach(b=>{
+  b.addEventListener("pointermove",e=>{const r=b.getBoundingClientRect();gsap.to(b,{x:(e.clientX-r.left-r.width/2)*.25,y:(e.clientY-r.top-r.height/2)*.25,duration:.3})});
+  b.addEventListener("pointerleave",()=>gsap.to(b,{x:0,y:0,duration:.6,ease:"elastic.out(1,.4)"}))});
+}
+</script>
+</body>
+</html>

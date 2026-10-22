@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Menú – HELADERIA</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FFF4F9;--card:#fff;--ink:#2B1B5A;--soft:#6B5C99;--pink:#FF4F8B;--mint:#9BE3B4;--sun:#FFD84D;--berry:#5B3CC4;--line:#F0D9E6;--chip:#F4ECFF;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root:not([data-theme="light"]){color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1C1038;--card:#2A1A55;--ink:#FFF4F9;--soft:#C9B8F5;--line:#44307F;--chip:#3A2672}}
+:root[data-theme="dark"]{--bg:#1C1038;--card:#2A1A55;--ink:#FFF4F9;--soft:#C9B8F5;--line:#44307F;--chip:#3A2672}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.55 "DM Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,.fr{font-family:"Fredoka","Trebuchet MS",sans-serif;margin:0;line-height:1.1}
+:focus-visible{outline:3px solid var(--berry);outline-offset:3px}
+.blob{position:fixed;z-index:-1;border-radius:50%;filter:blur(70px);opacity:.4;pointer-events:none;animation:fl 9s ease-in-out infinite alternate}
+@keyframes fl{to{transform:translate(50px,40px)}}
+header{text-align:center;padding:7vh 5vw 3vh}
+.logo{display:inline-block;font:700 1.2rem "Fredoka",sans-serif;color:var(--pink);text-decoration:none}
+.back{display:inline-block;margin-bottom:12px;background:var(--mint);color:#173B2A;font-weight:700;font-size:.95rem;padding:8px 18px;border-radius:999px;text-decoration:none;transition:transform .2s}.back:hover{transform:translateX(-4px)}
+header .logo{display:block}
+footer a{color:inherit;text-decoration:underline}
+h1{font-size:clamp(3rem,11vw,6rem);display:flex;justify-content:center;gap:.04em}
+h1 span{display:inline-block;animation:drop .8s cubic-bezier(.3,1.6,.5,1) both;animation-delay:calc(var(--i)*90ms)}
+@keyframes drop{from{transform:translateY(-90px) rotate(-25deg) scale(.3);opacity:0}}
+.tag{color:var(--soft);margin:.6rem auto 0;max-width:36ch}
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:grid;grid-template-columns:1fr 1fr;position:sticky;width:min(520px,92vw);margin:1rem auto 2rem;padding:5px;border-radius:999px;background:color-mix(in srgb,var(--card) 70%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:2px solid var(--line)}
+.tabs::before{content:"";position:absolute;inset:5px auto 5px 5px;width:calc(50% - 5px);border-radius:999px;background:linear-gradient(135deg,var(--pink),#FF9A3D);transition:transform .45s cubic-bezier(.3,1.5,.5,1)}
+.tabs[data-t="1"]::before{transform:translateX(100%)}
+.tab{position:relative;border:0;background:none;color:var(--ink);font:700 1.05rem "Fredoka",sans-serif;padding:12px 6px;cursor:pointer;border-radius:999px;transition:color .3s}
+.tab[aria-selected=true]{color:#fff}
+main{max-width:1000px;margin:auto;padding:0 5vw 16vh}
+.panel{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,430px),1fr));gap:1.5rem;align-items:start}
+.panel[hidden]{display:none}
+.card{background:color-mix(in srgb,var(--card) 80%,transparent);backdrop-filter:blur(10px);border:2px solid var(--line);border-radius:30px 60px 30px 60px;padding:22px}
+.card:nth-child(even){border-radius:60px 30px 60px 30px}
+.card.wide{grid-column:1/-1}
+.js .card{opacity:0;transform:translateY(50px) scale(.95);transition:opacity .6s,transform .7s cubic-bezier(.3,1.4,.5,1)}
+.js .card.in{opacity:1;transform:none}
+.hd{display:flex;align-items:center;gap:14px;margin-bottom:10px}
+.em{font-size:2.6rem;display:inline-block;animation:bob 2.4s ease-in-out infinite alternate}
+.card:nth-child(even) .em{animation-delay:-1.2s}
+@keyframes bob{to{transform:translateY(-8px) rotate(10deg)}}
+h2{font-size:1.7rem;flex:1}
+.pr{background:var(--sun);color:#2B1B5A;font:700 1.15rem "Fredoka",sans-serif;padding:6px 14px;border-radius:999px;white-space:nowrap;transform:rotate(3deg)}
+.note{color:var(--soft);font-size:.95rem;margin:.2rem 0 .8rem}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.chips li{background:var(--chip);border-radius:999px;padding:6px 14px;font-size:.95rem;transition:transform .2s,background .2s}
+.chips li:hover{transform:scale(1.07) rotate(-2deg);background:var(--mint);color:#173B2A}
+.js .chips li{opacity:0;transform:scale(.6)}
+.js .card.in .chips li{opacity:1;transform:none;transition:opacity .4s,transform .5s cubic-bezier(.3,1.8,.5,1),background .2s;transition-delay:calc(var(--i)*55ms+.25s)}
+.js .card.in .chips li:hover{transform:scale(1.07) rotate(-2deg);transition-delay:0s}
+ol.chips{counter-reset:n}
+ol.chips li{display:flex;gap:8px;align-items:center;border-radius:16px;width:100%}
+ol.chips li::before{counter-increment:n;content:counter(n);flex:none;width:26px;height:26px;border-radius:50%;background:var(--berry);color:#fff;font:700 .85rem/26px "Fredoka",sans-serif;text-align:center}
+.tbl{overflow-x:auto;margin-top:6px}
+table{border-collapse:collapse;width:100%;min-width:430px;text-align:center}
+th{font:500 .9rem "Fredoka",sans-serif;color:var(--soft);padding:6px}
+td{padding:10px 6px;border-top:1px dashed var(--line);font-weight:500}
+td:first-child,th:first-child{text-align:left;font-weight:700}
+td:not(:first-child){transition:background .2s}
+tr:hover td{background:var(--chip)}
+.sub{margin-top:12px;padding-top:12px;border-top:2px dashed var(--line)}
+.sub h3{font-size:1.25rem}
+.pl{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+footer{text-align:center;color:var(--soft);padding:0 5vw 6vh;font-size:.9rem}
+@media(prefers-reduced-motion:reduce){*,::before{animation:none!important;transition:none!important}.js .card,.js .chips li{opacity:1;transform:none}}
+
+.ad{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0;display:inline-flex;align-items:center;gap:8px;width:100%;text-align:left;transition:transform .15s}
+.ad:active{transform:scale(.93)}
+.ad.ok{animation:okp .45s}@keyframes okp{40%{transform:scale(1.18);background:var(--mint);color:#173B2A;border-radius:12px}}
+.chips li{padding:0}.chips li .ad{padding:6px 14px;border-radius:inherit}
+td .ad{justify-content:center;border-radius:10px;padding:8px 4px}td .ad:hover{background:var(--mint);color:#173B2A}
+.pl .ad{width:auto;flex-direction:column;align-items:flex-start;gap:0;background:var(--pink);color:#fff;border-radius:14px;padding:6px 14px;font-weight:700}
+.pl small{font-weight:400;font-size:.8rem;opacity:.95}
+.hint{display:flex;align-items:center;gap:8px;justify-content:center;color:var(--soft);font-size:.95rem;margin:-1rem auto 1.6rem;text-align:center}
+.sz{display:flex;gap:8px;margin:0 0 .9rem}
+.sz button{border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:4px 16px;font:700 1rem "Fredoka",sans-serif;cursor:pointer}
+.sz button[aria-pressed=true]{background:var(--berry);border-color:var(--berry);color:#fff}
+.bar{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translate(-50%,160%);z-index:8;width:min(440px,92vw);display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--pink),#FF9A3D);color:#fff;border:0;border-radius:999px;padding:16px 26px;font:700 1.15rem "Fredoka",sans-serif;box-shadow:0 8px 0 #B8265F;cursor:pointer;transition:transform .5s cubic-bezier(.3,1.5,.5,1)}
+.bar.on{transform:translate(-50%,0)}.bar.bump{animation:bp .4s}@keyframes bp{50%{scale:1.07}}
+dialog{border:0;border-radius:28px;padding:0;width:min(480px,92vw);max-height:92vh;background:var(--card);color:var(--ink);box-shadow:0 20px 60px rgba(0,0,0,.35)}
+dialog::backdrop{background:rgba(43,27,90,.6)}
+dialog[open]{animation:dp .4s cubic-bezier(.3,1.5,.5,1)}@keyframes dp{from{transform:scale(.85);opacity:0}}
+.m{padding:22px}.m h2{font-size:2rem;flex:none}
+.x{float:right;background:none;border:0;color:var(--ink);font-size:1.8rem;cursor:pointer}
+.cat{font:700 1rem "Fredoka",sans-serif;color:var(--berry);margin:10px 0 2px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 0;border-bottom:1px dashed var(--line);font-size:.95rem}
+.q{display:flex;align-items:center;gap:6px;white-space:nowrap}
+.q button{width:30px;height:30px;border-radius:50%;border:2px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;font-weight:700}
+.tot{font:700 1.5rem "Fredoka",sans-serif;margin:14px 0 4px}
+label{display:block;font-weight:700;margin-top:12px;font-size:.95rem}
+input,select{width:100%;padding:10px 12px;border-radius:12px;border:2px solid var(--line);background:var(--bg);color:var(--ink);font:inherit}
+.err{color:#D6245A;font-size:.9rem;min-height:1.3em;margin-top:6px}
+.send{width:100%;background:#25A55F;color:#fff;border:0;border-radius:999px;padding:14px;font:700 1.1rem "Fredoka",sans-serif;margin-top:8px;cursor:pointer}
+.small{font-size:.85rem;color:var(--soft);margin:6px 0 0}
+.sm{border-radius:18px;padding:12px 16px;margin-top:14px;border:2px dashed var(--line);background:var(--chip);font-size:.95rem;line-height:1.5}
+.sm .st{font:700 1.2rem "Fredoka",sans-serif}
+.sm.mesa .st{color:var(--berry)}
+.sm.dom{background:var(--mint);color:#173B2A;border:2px solid #2FB36B}
+.sm.llevar{background:var(--sun);color:#2B1B5A;border:2px solid #E8B800}
+html,body{overflow-x:clip}
+.tabs{top:calc(env(safe-area-inset-top,0px) + 6px);background:color-mix(in srgb,var(--card) 93%,transparent);margin-bottom:1.6rem}
+.hint{padding:0 6vw}
+.hd{flex-wrap:wrap}
+h2{min-width:0}
+.pr{margin-left:auto}
+.tbl::after{content:"Desliza para ver todas las opciones →";display:none;text-align:center;color:var(--soft);font-size:.85rem;padding-top:8px}
+@media(max-width:560px){
+body{font-size:16px}
+header{padding:5vh 5vw 2vh}
+.tag{font-size:.95rem}
+.tab{font-size:.92rem;padding:10px 4px}
+.panel{gap:1rem}
+.card{padding:16px;border-radius:28px 44px 28px 44px}.card:nth-child(even){border-radius:44px 28px 44px 28px}
+.em{font-size:2.1rem}
+h2{font-size:1.4rem;flex:1 1 120px}
+.pr{font-size:1rem;transform:none;padding:5px 12px;white-space:normal}
+.note{font-size:.9rem}
+.chips li .ad{padding:8px 12px;font-size:.93rem}
+table{min-width:400px;font-size:.88rem}
+th{font-size:.8rem}
+td .ad{padding:10px 2px}
+.tbl::after{display:block}
+.pl .ad{padding:8px 14px}
+.sz button{padding:6px 16px}
+.m{padding:18px}.m h2{font-size:1.6rem}
+.q button{width:36px;height:36px}
+.bar{padding:14px 20px;font-size:1.05rem}
+}
+</style>
+</head>
+<body>
+<div class="blob" style="width:360px;height:360px;background:#FF4F8B;top:-80px;left:-90px"></div>
+<div class="blob" style="width:320px;height:320px;background:#9BE3B4;bottom:8%;right:-90px;animation-delay:-4s"></div>
+
+<header>
+  <a class="back" href="index.html">← Volver al inicio</a>
+  <a class="logo" href="index.html" aria-label="HELADERIA, inicio">🍦 HELADERIA</a>
+  <h1 id="t" aria-label="Menú"></h1>
+  <p class="tag">Elige tu antojo: comida para el hambre y helados para la sonrisa.</p>
+</header>
+
+<div class="tabs" id="tabs" data-t="0" role="tablist">
+  <button class="tab" role="tab" aria-selected="true" aria-controls="p0" id="b0">🍕 Comidas rápidas</button>
+  <button class="tab" role="tab" aria-selected="false" aria-controls="p1" id="b1">🍨 Helados y bebidas</button>
+</div>
+
+<p class="hint">👆 Toca un sabor o un precio para agregarlo a tu pedido</p>
+<main>
+  <div class="panel" id="p0" role="tabpanel" aria-labelledby="b0"></div>
+  <div class="panel" id="p1" role="tabpanel" aria-labelledby="b1" hidden></div>
+</main>
+<footer>Precios en pesos colombianos. Los combos aplican solo para productos Coca-Cola.<br><a href="index.html">← Volver al inicio</a></footer>
+
+<button class="bar" id="bar" aria-live="polite"><span id="bc">Ver mi pedido</span><span id="bt"></span></button>
+<dialog id="dlg"><div class="m">
+<button class="x" id="cl" aria-label="Cerrar">×</button>
+<h2>Tu pedido</h2>
+<div id="its"></div><div class="tot" id="tot"></div>
+<label for="nom">Tu nombre</label><input id="nom" autocomplete="name">
+<label for="tp">¿Cómo lo recibes?</label>
+<select id="tp"><option value="mesa">En mesa</option><option value="llevar">Para llevar</option><option value="dom">Domicilio</option></select>
+<div id="xw"><label for="ex" id="exl">Número de mesa</label><input id="ex"></div>
+<label for="pg">Forma de pago</label>
+<select id="pg"><option>Efectivo</option><option>Transferencia</option></select>
+<label for="nt">Notas (opcional)</label><input id="nt" placeholder="Ej: sin cebolla, salsa aparte">
+<p class="small" id="dn" hidden>El valor del domicilio se confirma por WhatsApp.</p>
+<div class="sm" id="sm" aria-live="polite"></div>
+<div class="err" id="er" role="alert"></div>
+<button class="send" id="sd">Enviar pedido por WhatsApp</button>
+</div></dialog>
+<script>
+document.documentElement.classList.add("js");
+const $=s=>document.querySelector(s);
+const WHATSAPP="573000000000"; // Cambia por el número de WhatsApp de la heladería
+const money=n=>"$"+Number(n).toLocaleString("es-CO");
+const SAB=["Piña, jamón y queso","Pepperoni y queso","Pollo, champiñón, jamón y queso","Carne molida, chorizo, queso y maíz","Jalapeños, tostacos, cilantro, carne y tomate","Cabano, salami, pollo, jamón y queso","Pollo, jamón y queso"];
+const BEB=["Maracuyá","Cereza","Mango biche","Sandía","Arándanos","Fresa","Chicle"];
+const D=[[
+ {e:"🍕",t:"Pizzas personales",tag:"$7.000 c/u",pr:7000,n:"Elige tu sabor",o:SAB},
+ {e:"🥟",t:"Pasteles",tag:"$4.000 c/u",pr:4000,n:"Elige tu sabor",l:SAB},
+ {e:"🍟",t:"Salchipapa",tag:"$10.000",n:"Único tamaño · Papas, salchicha, queso y salsas",pl:[["Agregar salchipapa",10000,"Salchipapa"]]},
+ {e:"🍔",t:"Hamburguesas",w:1,n:"Combos solo con productos Coca-Cola",tb:{h:["","En combo","Con gaseosa mini","Con gaseosa 400 ml"],s:"Sola",r:[["Sencilla",[12000,16000,15000,16000]],["Doble",[16000,20000,21000,21000]]]}},
+ {e:"🌭",t:"Perros calientes",w:1,sub:[
+  {t:"Perra Cachorra",l:["Salchicha artesanal","Queso fundido","Papas fosforito","Carne molida"],pr:[["Sencilla",10000],["Combo mini",13000],["Combo 400 ml",14000]]},
+  {t:"Perro Cachorro",l:["Chorizo artesanal","Queso crema","Hogao tradicional"],pr:[["Sencilla",10000],["Combo mini",13000],["Combo 400 ml",14000]]}]}
+],[
+ {e:"🍦",t:"Helados soft",tag:"$3.500",n:"De máquina · 2 sabores intercalados que varían cada día",pl:[["Agregar helado soft",3500,"Helado soft"]]},
+ {e:"🍧",t:"Conos",tag:"$3.500",pr:3500,n:"Elige tu sabor",l:["Chicle","Vainilla chips","Chocolate","Arequipe","Maracuyá","Mandarina","Frutos rojos","Napolitano","Latte maní","Tres leches","Verano tropical"],pl:[["Bolita extra",1000,"Bolita extra"]]},
+ {e:"🍨",t:"Sundae en vaso",tag:"$4.500 o $6.500",pr:[4500,6500],n:"Helado de máquina con toppings: frutas, fresas, golosinas, granola. Elige el precio y el sabor:",l:["Fresa suprema","Gomitas tentación","Oreo","Kiwi con mango","Granola con mango","Marshmallows","Chispitos con leche en polvo","Súper chips"]},
+ {e:"🥤",t:"Sodas",tag:"$6.000",pr:6000,n:"Único tamaño · Elige tu sabor",l:BEB},
+ {e:"🧇",t:"Waffles",tag:"$6.000",pr:6000,n:"Elige tu sabor",l:["Kiwi con fresa","Fresa con banano","Banano con helado","Durazno","M&M’s","Oreo","Chocolate con fresa","Banano con queso y chantilly"]},
+ {e:"🍧",t:"Raspados",tag:"$6.000",pr:6000,n:"Elige tu sabor",l:BEB}
+]];
+const bt=(c,n,p,inner)=>`<button class="ad" data-c="${c.t}" data-e="${c.e}" data-n="${n}" data-p="${p}">${inner}</button>`;
+const li=(c,a,p)=>a.map((x,i)=>`<li style="--i:${i}">${bt(c,x,Array.isArray(p)?p[0]:p,x)}</li>`).join("");
+const pills=(c,a,pre="")=>`<div class="pl">${a.map(x=>bt(c,pre+x[2||0]?(x[2]||pre+x[0]):x[0],x[1],`<small>${x[0]}</small>${money(x[1])}`)).join("")}</div>`;
+const card=c=>`<article class="card${c.w?" wide":""}"${Array.isArray(c.pr)?` data-p="${c.pr[0]}"`:""}><div class="hd"><span class="em" aria-hidden="true">${c.e}</span><h2>${c.t}</h2>${c.tag?`<span class="pr">${c.tag}</span>`:""}</div>`+
+ (c.n?`<p class="note">${c.n}</p>`:"")+
+ (Array.isArray(c.pr)?`<div class="sz" role="group" aria-label="Precio">${c.pr.map((v,i)=>`<button data-v="${v}" aria-pressed="${!i}">${money(v)}</button>`).join("")}</div>`:"")+
+ (c.o?`<ol class="chips">${li(c,c.o,c.pr)}</ol>`:"")+(c.l?`<ul class="chips">${li(c,c.l,c.pr)}</ul>`:"")+
+ (c.pl?pills(c,c.pl):"")+
+ (c.tb?`<div class="tbl"><table><thead><tr>${[c.tb.h[0],c.tb.s,...c.tb.h.slice(1)].map(h=>`<th scope="col">${h}</th>`).join("")}</tr></thead><tbody>${c.tb.r.map(r=>`<tr><th scope="row">${r[0]}</th>${r[1].map((v,i)=>{const col=i?c.tb.h[i]:c.tb.s;return `<td>${bt(c,"Hamburguesa "+r[0].toLowerCase()+" · "+col,v,money(v))}</td>`}).join("")}</tr>`).join("")}</tbody></table></div>`:"")+
+ (c.sub?c.sub.map(u=>`<div class="sub"><h3>${u.t}</h3><ul class="chips" style="margin-top:8px">${u.l.map((x,i)=>`<li style="--i:${i}"><span style="padding:6px 14px">${x}</span></li>`).join("")}</ul><div class="pl">${u.pr.map(x=>bt(c,u.t+" · "+x[0],x[1],`<small>${x[0]}</small>${money(x[1])}`)).join("")}</div></div>`).join(""):"")+`</article>`;
+D.forEach((d,i)=>$("#p"+i).innerHTML=d.map(card).join(""));
+$("#t").innerHTML=[..."Menú"].map((c,i)=>`<span aria-hidden="true" style="--i:${i};color:${["#FF4F8B","#FF9A3D","#2FB36B","#5B3CC4"][i]}">${c}</span>`).join("");
+
+// ---------- Pedido ----------
+const cart=new Map(),dlg=$("#dlg");
+const tot=()=>[...cart.values()].reduce((a,x)=>a+x.p*x.q,0),cnt=()=>[...cart.values()].reduce((a,x)=>a+x.q,0);
+function sync(bump){const n=cnt(),b=$("#bar");b.classList.toggle("on",n>0);$("#bc").textContent=`🛒 Ver mi pedido (${n})`;$("#bt").textContent=money(tot());
+ if(bump){b.classList.remove("bump");void b.offsetWidth;b.classList.add("bump")}}
+function list(){const ks=[...cart.keys()];let h="",last="";
+ ks.forEach((k,i)=>{const x=cart.get(k);if(x.c!==last){h+=`<div class="cat">${x.e} ${x.c}</div>`;last=x.c}
+  h+=`<div class="row"><span>${x.n}<br><small>${money(x.p)} c/u</small></span><span class="q"><button data-k="${i}" data-d="-1" aria-label="Quitar uno">−</button><b>${x.q}</b><button data-k="${i}" data-d="1" aria-label="Agregar uno">+</button></span></div>`});
+ $("#its").innerHTML=h||"<p>Tu pedido está vacío. Toca los productos del menú para agregarlos.</p>";$("#tot").textContent="Total: "+money(tot());sumario()}
+const sorted=()=>new Map([...cart].sort((a,b)=>a[1].c<b[1].c?-1:0));
+document.addEventListener("click",e=>{
+ const z=e.target.closest(".sz button");
+ if(z){z.closest(".card").dataset.p=z.dataset.v;z.parentNode.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",b===z));return}
+ const a=e.target.closest(".ad");
+ if(a){const cd=a.closest(".card");let n=a.dataset.n,p=+a.dataset.p;if(cd.dataset.p){p=+cd.dataset.p;n+=` (${money(p)})`}
+  const k=a.dataset.c+"|"+n,x=cart.get(k);x?x.q++:cart.set(k,{c:a.dataset.c,e:a.dataset.e,n,p,q:1});
+  a.classList.remove("ok");void a.offsetWidth;a.classList.add("ok");sync(true);return}
+ const q=e.target.closest("[data-k]");
+ if(q){const k=[...cart.keys()][+q.dataset.k],x=cart.get(k);x.q+=+q.dataset.d;if(x.q<1)cart.delete(k);list();sync(false)}
+});
+$("#bar").onclick=()=>{list();$("#er").textContent="";dlg.showModal()};
+$("#cl").onclick=()=>dlg.close();
+const esc=s=>s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+function sumario(){const tp=$("#tp").value,ex=esc($("#ex").value.trim()),n=cnt();
+ const t={mesa:["🪑","Pedido para la MESA"+(ex?" "+ex:"")],llevar:["🥡","Pedido PARA LLEVAR"],dom:["🛵","Pedido a DOMICILIO"]}[tp];
+ $("#sm").className="sm "+tp;
+ $("#sm").innerHTML=`<div class="st">${t[0]} ${t[1]}</div>`+(tp==="dom"?`<div>📍 ${ex||"Falta la dirección"}</div>`:"")+`<div>👤 ${esc($("#nom").value.trim())||"Falta tu nombre"} · 💳 ${$("#pg").value}</div><div>🧾 ${n} producto${n===1?"":"s"} · <b>${money(tot())}</b></div>`}
+["nom","ex","pg"].forEach(i=>$("#"+i).addEventListener("input",sumario));
+$("#tp").onchange=e=>{const v=e.target.value;$("#xw").hidden=v==="llevar";$("#exl").textContent=v==="dom"?"Dirección de entrega":"Número de mesa";$("#dn").hidden=v!=="dom";sumario()};
+$("#sd").onclick=()=>{
+ const nom=$("#nom").value.trim(),tp=$("#tp").value,ex=$("#ex").value.trim();
+ if(!cart.size)return $("#er").textContent="Agrega al menos un producto.";
+ if(!nom)return $("#er").textContent="Escribe tu nombre.";
+ if(tp!=="llevar"&&!ex)return $("#er").textContent=tp==="dom"?"Escribe la dirección de entrega.":"Escribe el número de mesa.";
+ const code=Math.random().toString(36).slice(2,5).toUpperCase()+String(new Date().getMinutes()).padStart(2,"0");
+ const g={};cart.forEach(x=>{(g[x.c]=g[x.c]||{e:x.e,l:[]}).l.push(`• ${x.q} x ${x.n} — ${money(x.p*x.q)}`)});
+ const lugar=tp==="mesa"?"En mesa "+ex:tp==="dom"?"Domicilio · "+ex:"Para llevar";
+ const nt=$("#nt").value.trim();
+ const msg=`🍦 *NUEVO PEDIDO · HELADERIA*\n🧾 Pedido #${code}\n👤 Cliente: ${nom}\n📍 *${lugar.toUpperCase()}*\n💳 Pago: ${$("#pg").value}\n━━━━━━━━━━\n`+
+  Object.entries(g).map(([c,v])=>`${v.e} *${c}*\n${v.l.join("\n")}`).join("\n\n")+
+  `\n━━━━━━━━━━\n💰 *TOTAL: ${money(tot())}*`+(tp==="dom"?"\n(Domicilio no incluido)":"")+(nt?`\n📝 Notas: ${nt}`:"");
+ window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`,"_blank");
+};
+
+// Revelado al hacer scroll
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.12});
+const watch=()=>document.querySelectorAll(".card:not(.in)").forEach(c=>io.observe(c));watch();
+
+// Si llegan desde el botón DOMICILIO del inicio, deja el pedido listo para domicilio
+if(location.hash==="#domicilio"){$("#tp").value="dom";$("#tp").dispatchEvent(new Event("change"))}
+// Pestañas
+const tabs=$("#tabs");
+[0,1].forEach(i=>$("#b"+i).onclick=()=>{
+ tabs.dataset.t=i;
+ [0,1].forEach(j=>{$("#b"+j).setAttribute("aria-selected",j===i);$("#p"+j).hidden=j!==i});
+ window.scrollTo({top:Math.min(scrollY,tabs.offsetTop-10)});watch();
+});
+</script>
+</body>
+</html>
